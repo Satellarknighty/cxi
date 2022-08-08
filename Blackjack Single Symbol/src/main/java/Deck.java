@@ -8,7 +8,9 @@ import java.util.Random;
  */
 public class Deck {
     /** The Cards remaining in the Deck. */
-    private Deque<Card> cards;
+    private final Deque<Card> cards;
+    /** Randomize the number of shuffles or the amount of cards in a cut. */
+    final Random random;
     /** Creates a new Deck. Cards will be added from Ace to King, as such King will stay on top of the Deck
      *  unless the method shuffle() or cut() is called. */
     public Deck(){
@@ -16,6 +18,7 @@ public class Deck {
         for (String value : Card.CARD_VALUES){
             cards.offerFirst(new Card(value));
         }
+        random = new Random();
     }
 
     /**
@@ -25,8 +28,10 @@ public class Deck {
     public Card draw(){
         return cards.pollFirst();
     }
-    public Deque<Card> getCards() {
-        return cards;
+    public void returnToTop(Card card){
+        if (card.getDisplay().equals("A"))
+            card.setValue(Card.ACE_VALUE_11);
+        cards.offerFirst(card);
     }
 
     /**
@@ -34,8 +39,7 @@ public class Deck {
      * and then moved under the bottom half (now top!).
      */
     public void cut(){
-        Random random = new Random();
-        final int cuttingPoint = random.nextInt(Card.CARD_VALUES.length);
+        int cuttingPoint = random.nextInt(Card.CARD_VALUES.length);
         cut(cuttingPoint);
     }
 
@@ -45,8 +49,23 @@ public class Deck {
      * @param topHalf The amount of Cards in the to-be-moved half.
      */
     void cut(int topHalf){
-        for (int time = 0; time < topHalf; time++) {
+        for (int card = 0; card < topHalf; card++) {
             cards.offerLast(cards.pollFirst());
         }
+    }
+
+    /**
+     * Shuffle the Deck randomly for a random amount of time.
+     * Limit is 99 times to avoid hindering the programm's speed.
+     */
+    public void shuffle(){
+        int numberOfTime = random.nextInt(100);
+        for (int time = 0; time < numberOfTime; time++) {
+            cut();
+        }
+    }
+
+    public Deque<Card> getCards() {
+        return cards;
     }
 }

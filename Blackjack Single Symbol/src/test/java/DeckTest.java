@@ -20,6 +20,26 @@ public class DeckTest {
     }
 
     @Test
+    void testDrawEmpty() {
+        final Deck testDeck = new Deck();
+        for (int i = 0; i < 13; i++) {
+            testDeck.draw();
+        }
+        Card oobCard = testDeck.draw();
+        assertThat(oobCard).isNull();
+    }
+
+    @Test
+    void testReturnAceToTop() {
+        final Deck testDeck = new Deck();
+        Card bottomCard = testDeck.getCards().pollLast();
+        assert bottomCard != null;
+        bottomCard.setValue(1);
+        testDeck.returnToTop(bottomCard);
+        assertThat(testDeck.draw()).isEqualTo(new Card("A"));
+    }
+
+    @Test
     void testCut1() {
         final Deck testDeck = new Deck();
         testDeck.cut(1);
