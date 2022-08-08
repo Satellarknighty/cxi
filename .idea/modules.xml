@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Blackjack Single Symbol/BlackjackSingleSymbol.iml" filepath="$PROJECT_DIR$/Blackjack Single Symbol/BlackjackSingleSymbol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cxi.iml" filepath="$PROJECT_DIR$/.idea/cxi.iml" />
+    </modules>
+  </component>
+</project>
