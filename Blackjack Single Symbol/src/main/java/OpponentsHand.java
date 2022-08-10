@@ -20,4 +20,14 @@ public class OpponentsHand extends Hand {
         result.append("\t Value: ").append(firstCardInHand.getValue()).append(" + ?");
         return result.toString();
     }
+
+    /**
+     * At the end of the round, reveals the current Cards in the Hand
+     * and the current value.
+     *
+     * @return The String to be displayed on console.
+     */
+    public String reveal(){
+        return super.toString();
+    }
 }
