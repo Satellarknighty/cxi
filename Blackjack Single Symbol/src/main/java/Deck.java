@@ -10,7 +10,7 @@ public class Deck {
     /** The Cards remaining in the Deck. */
     private final Deque<Card> cards;
     /** Randomize the number of shuffles or the amount of cards in a cut. */
-    final Random random;
+    private final Random random;
     /** Creates a new Deck. Cards will be added from Ace to King, as such King will stay on top of the Deck
      *  unless the method shuffle() or cut() is called. */
     public Deck(){

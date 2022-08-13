@@ -1,4 +1,9 @@
 import java.util.Iterator;
+
+/**
+ * A class for the Hand of an opponent. Only the first Card is visible to the player,
+ * the rest are hidden and marked with "X".
+ */
 public class OpponentsHand extends Hand {
     /**
      * Displays the current Cards in the Hand, and the current value.
@@ -22,8 +27,8 @@ public class OpponentsHand extends Hand {
     }
 
     /**
-     * At the end of the round, reveals the current Cards in the Hand
-     * and the current value.
+     * At the end of the round, call this function to reveal the current
+     * Cards in the Hand and the current value.
      *
      * @return The String to be displayed on console.
      */
