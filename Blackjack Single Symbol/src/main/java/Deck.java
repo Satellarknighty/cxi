@@ -9,8 +9,9 @@ import java.util.Random;
 public class Deck {
     /** The Cards remaining in the Deck. */
     private final Deque<Card> cards;
-    /** Randomize the number of shuffles or the amount of cards in a cut. */
-    private final Random random;
+    /** Randomize the number of shuffles or the amount of cards in a cut. Also used in randomizing the actions of
+     * the opponent. */
+    static final Random random = new Random();
     /** Creates a new Deck. Cards will be added from Ace to King, as such King will stay on top of the Deck
      *  unless the method shuffle() or cut() is called. */
     public Deck(){
@@ -18,7 +19,6 @@ public class Deck {
         for (String value : Card.CARD_VALUES){
             cards.offerFirst(new Card(value));
         }
-        random = new Random();
     }
 
     /**
@@ -28,6 +28,13 @@ public class Deck {
     public Card draw(){
         return cards.pollFirst();
     }
+
+    /**
+     * Returns the passed in Card back to the top of the Deck. If it is an Ace,
+     * makes sure that Card has its original value of 11.
+     *
+     * @param card  The returned Card.
+     */
     public void returnToTop(Card card){
         if (card.getDisplay().equals("A"))
             card.setValue(Card.ACE_VALUE_11);
@@ -49,8 +56,12 @@ public class Deck {
      * @param topHalf The amount of Cards in the to-be-moved half.
      */
     void cut(int topHalf){
+        Deque<Card> secondStack = new ArrayDeque<>();
         for (int card = 0; card < topHalf; card++) {
-            cards.offerLast(cards.pollFirst());
+            secondStack.offerFirst(cards.pollFirst());
+        }
+        while (!secondStack.isEmpty()){
+            cards.offerLast(secondStack.pollFirst());
         }
     }
 

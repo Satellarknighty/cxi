@@ -32,7 +32,7 @@ public class DeckTest {
     @Test
     void testReturnAceToTop() {
         final Deck testDeck = new Deck();
-        Card bottomCard = testDeck.getCards().pollLast();
+        final Card bottomCard = testDeck.getCards().pollLast();
         assert bottomCard != null;
         bottomCard.setValue(1);
         testDeck.returnToTop(bottomCard);
@@ -44,5 +44,13 @@ public class DeckTest {
         final Deck testDeck = new Deck();
         testDeck.cut(1);
         assertThat(testDeck.draw()).isEqualTo(new Card("Q"));
+    }
+
+    @Test
+    void testCut2(){
+        final Deck testDeck = new Deck();
+        testDeck.cut(2);
+        assertThat(testDeck.draw()).isEqualTo(new Card("J"));
+        assertThat(testDeck.getCards().pollLast()).isEqualTo(new Card("K"));
     }
 }

@@ -13,7 +13,7 @@ public class SinglePlayer {
         while (!gameOver){
             final Deck deck = new Deck();
             final Hand playersHand = new Hand();
-            final Hand opponentsHand = new OpponentsHand();
+            final OpponentsHand opponentsHand = new OpponentsHand();
             final Scanner userInput = new Scanner(System.in);
             setUpBoard(deck, playersHand, opponentsHand);
             boolean roundOver = false;
@@ -41,27 +41,32 @@ public class SinglePlayer {
      * @param opponentsHand The Opponent's Hand.
      * @return  When a winner is found, returns true.
      */
-    private static boolean playRound(Scanner userInput, Deck deck, Hand playersHand, Hand opponentsHand) {
+    private static boolean playRound(Scanner userInput, Deck deck, Hand playersHand, OpponentsHand opponentsHand) {
         System.out.println("Hit or Stay? \n> ");
         final String input = userInput.nextLine();
         if (input.equalsIgnoreCase("Hit")){
             playersHand.draw(deck);
             if (playersHand.isBusted()){
-                showDown(playersHand,(OpponentsHand) opponentsHand, true);
+                showDown(playersHand, opponentsHand, true);
                 return true;
             }
-            opponentsHand.draw(deck);
-            if (opponentsHand.isBusted()){
-                showDown(playersHand,(OpponentsHand) opponentsHand, true);
-                return true;
+            if (!opponentsHand.checkStayed()){
+                opponentsHand.action(playersHand, deck);
+                if (opponentsHand.isBusted()){
+                    showDown(playersHand, opponentsHand, true);
+                    return true;
+                }
             }
         }
         else if (input.equalsIgnoreCase("Stay")){
-            while (!opponentsHand.isBusted()){
-                opponentsHand.draw(deck);
+            while (!opponentsHand.checkStayed()){
+                opponentsHand.action(playersHand, deck);
+                if (opponentsHand.isBusted()){
+                    showDown(playersHand, opponentsHand, true);
+                    return true;
+                }
             }
-            opponentsHand.returnLastDrawnCardToDeck(deck);
-            showDown(playersHand, (OpponentsHand) opponentsHand, false);
+            showDown(playersHand, opponentsHand, false);
             return true;
         }
         else if (input.equalsIgnoreCase("Shuffle"))
@@ -69,7 +74,7 @@ public class SinglePlayer {
         else if (input.equalsIgnoreCase("Cheat"))
             playersHand.returnLastDrawnCardToDeck(deck);
         else if (input.equalsIgnoreCase("Peek")) {
-            reveal(playersHand, (OpponentsHand) opponentsHand);
+            reveal(playersHand, opponentsHand);
         } else
             System.out.println("Just say Hit or Stay man it's not that hard.");
         gameState(playersHand, opponentsHand);

@@ -15,7 +15,7 @@ public class Hand {
     /** Tells if this Hand is Busted. */
     private boolean isBusted;
     /** If the current value of the Hand exceeds this amount, the Hand is considered Busted. */
-    private static final int LIMIT_BEFORE_BUST = 21;
+    static final int LIMIT_BEFORE_BUST = 21;
 
     /**
      * Generates a new Hand. Current value is 0, and as such the Hand is not yet Busted.
@@ -40,7 +40,7 @@ public class Hand {
      * Calculate the current Value of the Hand, optimizing the Ace's value.
      * If the value exceeds 21, the Hand is Busted.
      */
-    private void calculateTotalValue() {
+    void calculateTotalValue() {
         totalValue = 0;
         Card ace = null;
         for (Card card : cards) {
