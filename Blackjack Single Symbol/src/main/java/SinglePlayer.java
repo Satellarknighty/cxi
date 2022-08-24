@@ -42,7 +42,7 @@ public class SinglePlayer {
      * @return  When a winner is found, returns true.
      */
     private static boolean playRound(Scanner userInput, Deck deck, Hand playersHand, OpponentsHand opponentsHand) {
-        System.out.println("Hit or Stay? \n> ");
+        System.out.println("Hit or Stay? ");
         final String input = userInput.nextLine();
         if (input.equalsIgnoreCase("Hit")){
             playersHand.draw(deck);
@@ -75,8 +75,11 @@ public class SinglePlayer {
             playersHand.returnLastDrawnCardToDeck(deck);
         else if (input.equalsIgnoreCase("Peek")) {
             reveal(playersHand, opponentsHand);
-        } else
-            System.out.println("Just say Hit or Stay man it's not that hard.");
+        }
+        else {
+            System.out.println("Just say Hit or Stay man it's not that hard. \n");
+            return false;
+        }
         gameState(playersHand, opponentsHand);
         return false;
     }
@@ -90,7 +93,7 @@ public class SinglePlayer {
      * @return  true if the Player wants to quit.
      */
     private static boolean askGameOver(Scanner userInput) {
-        System.out.println("Play again? (Y/N) \n> ");
+        System.out.println("Play again? (Y/N)");
         final String input = userInput.nextLine();
         return input.equalsIgnoreCase("N") || input.contains("no") || input.contains("No");
     }

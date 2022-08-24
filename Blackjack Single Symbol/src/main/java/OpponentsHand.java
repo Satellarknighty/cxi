@@ -66,18 +66,18 @@ public class OpponentsHand extends Hand {
     21 -> 0 -> -10
      */
     public void action(Hand opposingHand, Deck fromDeck){
-        int probability = 10;
-        probability -= (getTotalValue() - (LIMIT_BEFORE_BUST - probability)); //Now it will lie somewhere between 0 and >=10
-        if (Deck.random.nextInt(1, 11) <= probability){
-            draw(fromDeck);
-            System.out.println("Opponent drew!");
+        if (!hasStayed) {
+            int probability = 10;
+            probability -= (getTotalValue() - (LIMIT_BEFORE_BUST - probability)); //Now it will lie somewhere between 0 and >=10
+            if (Deck.random.nextInt(1, 11) <= probability) {
+                draw(fromDeck);
+                System.out.println("Opponent hit!");
+            }
+            else {
+                hasStayed = true;
+                System.out.println("Opponent stayed!");
+            }
         }
-
-        else {
-            hasStayed = true;
-            System.out.println("Opponent stayed!");
-        }
-
     }
 
     public boolean checkStayed(){
