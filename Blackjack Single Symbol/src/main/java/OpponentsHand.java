@@ -47,7 +47,8 @@ public class OpponentsHand extends Hand {
      * The opponent performs an action when this method is called. He can either hit,
      * stay, or even use power-ups, depending on which cards he currently has and which
      * cards his opponent has. The action is defined through a probability using an
-     * instance of the Random class found in {@link Deck}.
+     * instance of the Random class found in {@link Deck}. The reference to the opposing
+     * Hand is still Work in progress.
      *
      * @param opposingHand  The opposing (or player's Hand in a Single Player game) to
      *                      refer to.
@@ -80,6 +81,11 @@ public class OpponentsHand extends Hand {
         }
     }
 
+    /**
+     * Check if they have stayed or not.
+     *
+     * @return true if they stayed
+     */
     public boolean checkStayed(){
         return hasStayed;
     }

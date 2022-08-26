@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Call the class game() to start a Single Player game. I hate myself for what I wrote here.
  * And no you are not getting a Test unit for this class.
@@ -14,7 +12,7 @@ public class SinglePlayer {
             final Deck deck = new Deck();
             final Hand playersHand = new Hand();
             final OpponentsHand opponentsHand = new OpponentsHand();
-            final Scanner userInput = new Scanner(System.in);
+            final Parser userInput = new Parser();
             setUpBoard(deck, playersHand, opponentsHand);
             boolean roundOver = false;
             while (!roundOver){
@@ -28,10 +26,8 @@ public class SinglePlayer {
     /**
      * Manages the stuff that happens in a round of Blackjack. First a Deck is created,
      * then 2 Hands, and each Hand is dealt two Cards. The Player will be prompted to
-     * either Hit or Stay. If the Player hits then a Card is added to their Hand, and afterwards
-     * a Card is added to the Opponent's Hand. Both Hands are checked if they bust. If the Player
-     * stays then the Opponent would draw as many Cards as it can until it busts, then it will
-     * return the last drawn Card back to the Deck and two Hands are compared for value.
+     * either Hit or Stay. Afterwards if the Opponent hasn't stayed, it can decide to either hit or stay.
+     * Both Hands are checked if they are busted after each hit.
      *
      * @param userInput     Valid inputs are "hit", "stay", "cheat", "reveal" and "shuffle", which are
      *                      case-insensitive. For "cheat", "peek" and "shuffle" read the source code
@@ -41,44 +37,43 @@ public class SinglePlayer {
      * @param opponentsHand The Opponent's Hand.
      * @return  When a winner is found, returns true.
      */
-    private static boolean playRound(Scanner userInput, Deck deck, Hand playersHand, OpponentsHand opponentsHand) {
-        System.out.println("Hit or Stay? ");
-        final String input = userInput.nextLine();
-        if (input.equalsIgnoreCase("Hit")){
-            playersHand.draw(deck);
-            if (playersHand.isBusted()){
-                showDown(playersHand, opponentsHand, true);
+    private static boolean playRound(Parser userInput, Deck deck, Hand playersHand, OpponentsHand opponentsHand) {
+        switch (userInput.getPlayCommand()){
+            case HIT -> {
+                playersHand.draw(deck);
+                if (playersHand.isBusted()){
+                    showDown(playersHand, opponentsHand, true);
+                    return true;
+                }
+                if (!opponentsHand.checkStayed()){
+                    opponentsHand.action(playersHand, deck);
+                    if (opponentsHand.isBusted()){
+                        showDown(playersHand, opponentsHand, true);
+                        return true;
+                    }
+                }
+            }
+            case STAY -> {
+                while (!opponentsHand.checkStayed()){
+                    opponentsHand.action(playersHand, deck);
+                    if (opponentsHand.isBusted()){
+                        showDown(playersHand, opponentsHand, true);
+                        return true;
+                    }
+                }
+                showDown(playersHand, opponentsHand, false);
                 return true;
             }
-            if (!opponentsHand.checkStayed()){
-                opponentsHand.action(playersHand, deck);
-                if (opponentsHand.isBusted()){
-                    showDown(playersHand, opponentsHand, true);
-                    return true;
-                }
+            case SHUFFLE -> deck.shuffle();
+            case CHEAT -> playersHand.returnLastDrawnCardToDeck(deck);
+            case PEEK -> reveal(playersHand, opponentsHand);
+            case QUIT -> {
+                return true;
             }
-        }
-        else if (input.equalsIgnoreCase("Stay")){
-            while (!opponentsHand.checkStayed()){
-                opponentsHand.action(playersHand, deck);
-                if (opponentsHand.isBusted()){
-                    showDown(playersHand, opponentsHand, true);
-                    return true;
-                }
+            case UNKNOWN -> {
+                System.out.println("Just say Hit or Stay man it's not that hard. \n");
+                return false;
             }
-            showDown(playersHand, opponentsHand, false);
-            return true;
-        }
-        else if (input.equalsIgnoreCase("Shuffle"))
-            deck.shuffle();
-        else if (input.equalsIgnoreCase("Cheat"))
-            playersHand.returnLastDrawnCardToDeck(deck);
-        else if (input.equalsIgnoreCase("Peek")) {
-            reveal(playersHand, opponentsHand);
-        }
-        else {
-            System.out.println("Just say Hit or Stay man it's not that hard. \n");
-            return false;
         }
         gameState(playersHand, opponentsHand);
         return false;
@@ -92,10 +87,8 @@ public class SinglePlayer {
      *                  a new Round.
      * @return  true if the Player wants to quit.
      */
-    private static boolean askGameOver(Scanner userInput) {
-        System.out.println("Play again? (Y/N)");
-        final String input = userInput.nextLine();
-        return input.equalsIgnoreCase("N") || input.contains("no") || input.contains("No");
+    private static boolean askGameOver(Parser userInput) {
+        return userInput.getQuitCommand().equals(AvailableCommand.QUIT);
     }
 
     /**

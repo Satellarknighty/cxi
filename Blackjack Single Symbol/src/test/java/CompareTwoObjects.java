@@ -14,7 +14,7 @@ public class CompareTwoObjects {
      * @param firstDeque    The first Deque to be compared.
      * @param secondDeque   The second Deque to be compared.
      * @return  If the two Deque have the same content.
-     * @param <E>   The type stored in the two Deque.
+     * @param <E>           The type stored in the two Deque.
      */
     public static <E> boolean thatAreDeque(@NotNull Deque<E> firstDeque, Deque<E> secondDeque){
         while (!firstDeque.isEmpty()){
