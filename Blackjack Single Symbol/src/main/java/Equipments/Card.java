@@ -1,28 +1,30 @@
+package Equipments;
+
 import java.util.Objects;
 
 /**
- * The playing Card. It doesn't have a suit. The value of a card is determined
+ * The playing Equipments.Card. It doesn't have a suit. The value of a card is determined
  * according to the rules of Blackjack. As in, cards from 2 to 10 have face value,
  * J, Q, K have value of 10, and Ace are either 11 or 1.
  */
 public class Card {
-    /** The number or letter that appears on the Card. */
-    static final String[] CARD_VALUES = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    /** The current value of the Card. */
+    /** The number or letter that appears on the Equipments.Card. */
+    public static final String[] CARD_VALUES = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    /** The current value of the Equipments.Card. */
     private int value;
-    /** The number or letter that appears on this Card. */
+    /** The number or letter that appears on this Equipments.Card. */
     private final String display;
     /** Constant for the 11 value of Ace. */
-    static final int ACE_VALUE_11 = 11;
+    public static final int ACE_VALUE_11 = 11;
     /** Constant for the 1 value of Ace. */
-    static final int ACE_VALUE_1 = 1;
+    public static final int ACE_VALUE_1 = 1;
     /** Constant for the 10 value of Jack, Queen and King. */
-    static final int JQK_VALUE = 10;
+    public static final int JQK_VALUE = 10;
 
     /**
-     * Creates a new Card with the given display. The value of the Card will be determined
+     * Creates a new Equipments.Card with the given display. The value of the Equipments.Card will be determined
      * automatically. Aces are given the initial value of 11.
-     * @param display The face of the Card.
+     * @param display The face of the Equipments.Card.
      */
     public Card (String display){
         this.display = display;
@@ -34,11 +36,11 @@ public class Card {
     }
 
     /**
-     * Purely for testing purposes of the Ace Card.
-     * @param display   The face of the Card.
-     * @param value     The value of the Card.
+     * Purely for testing purposes of the Ace Equipments.Card.
+     * @param display   The face of the Equipments.Card.
+     * @param value     The value of the Equipments.Card.
      */
-    Card (String display, int value){
+    public Card(String display, int value){
         this.display = display;
         this.value = value;
     }
@@ -52,9 +54,9 @@ public class Card {
     }
 
     /**
-     * Set the value of a Card. Used only for the Ace where the value could be 11 or 1 so that it best
-     * complements the player's Hand.
-     * @param value The new value of the Card.
+     * Set the value of a Equipments.Card. Used only for the Ace where the value could be 11 or 1 so that it best
+     * complements the player's Equipments.Hand.
+     * @param value The new value of the Equipments.Card.
      */
     public void setValue(int value) {
         this.value = value;
@@ -76,4 +78,5 @@ public class Card {
     public int hashCode() {
         return Objects.hash(value, display);
     }
+
 }

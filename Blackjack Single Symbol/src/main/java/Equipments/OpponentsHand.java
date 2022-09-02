@@ -1,7 +1,9 @@
+package Equipments;
+
 import java.util.Iterator;
 
 /**
- * A class for the Hand of an opponent. Only the first Card is visible to the player,
+ * A class for the Equipments.Hand of an opponent. Only the first Equipments.Card is visible to the player,
  * the rest are hidden and marked with "X".
  */
 public class OpponentsHand extends Hand {
@@ -14,8 +16,8 @@ public class OpponentsHand extends Hand {
         hasStayed = false;
     }
     /**
-     * Displays the current Cards in the Hand, and the current value.
-     * As this is the opponent's Hand, the second Card onwards will be
+     * Displays the current Cards in the Equipments.Hand, and the current value.
+     * As this is the opponent's Equipments.Hand, the second Equipments.Card onwards will be
      * hidden and marked with a "X".
      *
      * @return The String to be displayed on console.
@@ -36,7 +38,7 @@ public class OpponentsHand extends Hand {
 
     /**
      * At the end of the round, call this function to reveal the current
-     * Cards in the Hand and the current value.
+     * Cards in the Equipments.Hand and the current value.
      *
      * @return The String to be displayed on console.
      */
@@ -48,11 +50,11 @@ public class OpponentsHand extends Hand {
      * stay, or even use power-ups, depending on which cards he currently has and which
      * cards his opponent has. The action is defined through a probability using an
      * instance of the Random class found in {@link Deck}. The reference to the opposing
-     * Hand is still Work in progress.
+     * Equipments.Hand is still Work in progress.
      *
-     * @param opposingHand  The opposing (or player's Hand in a Single Player game) to
+     * @param opposingHand  The opposing (or player's Equipments.Hand in a Single Player game) to
      *                      refer to.
-     * @param fromDeck      The Deck to draw the Card from.
+     * @param fromDeck      The Equipments.Deck to draw the Equipments.Card from.
      */
     /*
     12 -> 9 -> -1

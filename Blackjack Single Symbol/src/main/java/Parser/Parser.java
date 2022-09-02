@@ -1,3 +1,5 @@
+package Parser;
+
 import java.util.Scanner;
 /**
  * Parses the input of the player. It deals with inputs for play and for quit.
@@ -33,6 +35,10 @@ public class Parser {
         return commands.getPlayCommand(userInput);
     }
 
+    public Scanner getScanner() {
+        return scanner;
+    }
+
     /**
      * To prompt the player if they would like another game. This function will run
      * until the player has entered a valid input.
@@ -47,5 +53,13 @@ public class Parser {
             userInput = scanner.nextLine();
         }
         return commands.getQuitCommand(userInput);
+    }
+
+    public void helpDuringPlay(){
+        commands.getHelpPlayCommand();
+    }
+
+    public void helpDuringQuit(){
+        commands.getHelpQuitCommand();
     }
 }

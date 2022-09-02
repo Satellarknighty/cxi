@@ -1,3 +1,5 @@
+package Parser;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +36,7 @@ public class Commands {
         validPlayCommands.put("shuffle", AvailableCommand.SHUFFLE);
         validPlayCommands.put("peek", AvailableCommand.PEEK);
         validPlayCommands.put("quit", AvailableCommand.QUIT);
+        validPlayCommands.put("help", AvailableCommand.HELP);
     }
     /**
      * Generates valid commands for quit.
@@ -44,6 +47,7 @@ public class Commands {
         validQuitCommands.put("y", AvailableCommand.YES);
         validQuitCommands.put("n", AvailableCommand.QUIT);
         validQuitCommands.put("quit", AvailableCommand.QUIT);
+        validQuitCommands.put("help", AvailableCommand.HELP);
     }
 
     public AvailableCommand getPlayCommand(final String input){
@@ -57,5 +61,20 @@ public class Commands {
     }
     public boolean isQuitCommand(final String input){
         return validQuitCommands.containsKey(input.toLowerCase());
+    }
+
+    public void getHelpPlayCommand(){
+        System.out.print("Available commands are:");
+        for (String key : validPlayCommands.keySet()) {
+            System.out.print(" " + key);
+        }
+        System.out.println();
+    }
+    public void getHelpQuitCommand(){
+        System.out.print("Available commands are:");
+        for (String key : validQuitCommands.keySet()) {
+            System.out.print(" " + key);
+        }
+        System.out.println();
     }
 }

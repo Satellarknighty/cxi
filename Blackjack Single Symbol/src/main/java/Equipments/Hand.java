@@ -1,24 +1,26 @@
+package Equipments;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
 
 /**
- * The Hand of the player. Contains the drawn Cards, the current value of the Hand,
- * and if the Hand is Busted. Cards can be put back to the top of the Deck from here.
+ * The Equipments.Hand of the player. Contains the drawn Cards, the current value of the Equipments.Hand,
+ * and if the Equipments.Hand is Busted. Cards can be put back to the top of the Equipments.Deck from here.
  */
 public class Hand {
-    /** The current value of the Hand. Automatically optimized in the case of Ace. */
+    /** The current value of the Equipments.Hand. Automatically optimized in the case of Ace. */
     private int totalValue;
-    /** The current Cards in this Hand. */
+    /** The current Cards in this Equipments.Hand. */
     private final Deque<Card> cards;
-    /** Tells if this Hand is Busted. */
+    /** Tells if this Equipments.Hand is Busted. */
     private boolean isBusted;
-    /** If the current value of the Hand exceeds this amount, the Hand is considered Busted. */
+    /** If the current value of the Equipments.Hand exceeds this amount, the Equipments.Hand is considered Busted. */
     static final int LIMIT_BEFORE_BUST = 21;
 
     /**
-     * Generates a new Hand. Current value is 0, and as such the Hand is not yet Busted.
+     * Generates a new Equipments.Hand. Current value is 0, and as such the Equipments.Hand is not yet Busted.
      */
     public Hand(){
         totalValue = 0;
@@ -27,8 +29,8 @@ public class Hand {
     }
 
     /**
-     * Adds a Card to the Hand from a Deck. Then check the value of the
-     * @param fromDeck The Deck to add the Card from.
+     * Adds a Equipments.Card to the Equipments.Hand from a Equipments.Deck. Then check the value of the
+     * @param fromDeck The Equipments.Deck to add the Equipments.Card from.
      */
     public void draw(Deck fromDeck){
         final Card drawnCard = fromDeck.draw();
@@ -37,10 +39,10 @@ public class Hand {
     }
 
     /**
-     * Calculate the current Value of the Hand, optimizing the Ace's value.
-     * If the value exceeds 21, the Hand is Busted.
+     * Calculate the current Value of the Equipments.Hand, optimizing the Ace's value.
+     * If the value exceeds 21, the Equipments.Hand is Busted.
      */
-    void calculateTotalValue() {
+    public void calculateTotalValue() {
         totalValue = 0;
         Card ace = null;
         for (Card card : cards) {
@@ -61,8 +63,8 @@ public class Hand {
     }
 
     /**
-     * Return the latest drawn card back to the Deck.
-     * @param toDeck    The Deck to return the card to.
+     * Return the latest drawn card back to the Equipments.Deck.
+     * @param toDeck    The Equipments.Deck to return the card to.
      */
     public void returnLastDrawnCardToDeck(Deck toDeck) {
         if (!cards.isEmpty()) {
@@ -85,7 +87,7 @@ public class Hand {
     }
 
     /**
-     * Displays the current Cards in the Hand, and the current value.
+     * Displays the current Cards in the Equipments.Hand, and the current value.
      *
      * @return The String to be displayed on console.
      */

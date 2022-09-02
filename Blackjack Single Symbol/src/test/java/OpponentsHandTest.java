@@ -1,3 +1,7 @@
+import Equipments.Card;
+import Equipments.Deck;
+import Equipments.Hand;
+import Equipments.OpponentsHand;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
