@@ -1,6 +1,7 @@
 package Equipments;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * A class for the Equipments.Hand of an opponent. Only the first Equipments.Card is visible to the player,
@@ -70,8 +71,7 @@ public class OpponentsHand extends Hand {
      */
     public void action(Hand opposingHand, Deck fromDeck){
         if (!hasStayed) {
-            int probability = 10;
-            probability -= (getTotalValue() - (LIMIT_BEFORE_BUST - probability)); //Now it will lie somewhere between 0 and >=10
+            final float probability = calculateProbability(opposingHand, fromDeck); //Now it will lie somewhere between 0 and >=10
             if (Deck.random.nextInt(1, 11) <= probability) {
                 draw(fromDeck);
                 System.out.println("Opponent hit!");
@@ -81,6 +81,21 @@ public class OpponentsHand extends Hand {
                 System.out.println("Opponent stayed!");
             }
         }
+    }
+
+    private float calculateProbability(Hand opposingHand, Deck deck){
+//        return getTotalValue() - (LIMIT_BEFORE_BUST - currentProbability);
+        final int valueOfBestCard = LIMIT_BEFORE_BUST - getTotalValue();
+        if (valueOfBestCard >= Card.JQK_VALUE)  return valueOfBestCard;
+        int numberOfGoodCards = valueOfBestCard;
+        for (Card card : getCards()) {
+            int cardValue = card.getValue();
+            if ((cardValue == Card.ACE_VALUE_11 ? Card.ACE_VALUE_1 : cardValue) <= valueOfBestCard)
+                numberOfGoodCards--;
+        }
+        if (Objects.requireNonNull(opposingHand.getCards().peekLast()).getValue() <= valueOfBestCard)
+            numberOfGoodCards--;
+        return (float) numberOfGoodCards / deck.getCards().size();
     }
 
     /**

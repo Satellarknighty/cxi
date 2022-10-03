@@ -72,7 +72,7 @@ public class SinglePlayer {
                 return false;
             }
         }
-        gameState(playersHand, opponentsHand);
+        gameState(playersHand, opponentsHand, deck);
         return false;
     }
 
@@ -145,7 +145,7 @@ public class SinglePlayer {
         secondHand.draw(deck);
         firstHand.draw(deck);
         secondHand.draw(deck);
-        gameState(firstHand, secondHand);
+        gameState(firstHand, secondHand, deck);
     }
 
     /**
@@ -155,9 +155,10 @@ public class SinglePlayer {
      * @param firstHand     The Player's Equipments.Hand.
      * @param secondHand    The Opponent's Equipments.Hand.
      */
-    private static void gameState(Hand firstHand, Hand secondHand){
+    private static void gameState(Hand firstHand, Hand secondHand, Deck deck){
         System.out.println("You: \t" + firstHand);
         System.out.println("Opp: \t" + secondHand);
+        System.out.println("Cards left in Deck: " + deck.getCards().size());
     }
 
     /**
