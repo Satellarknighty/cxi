@@ -14,6 +14,7 @@ import java.util.Date;
 public class Exam extends DBEntity {
     @Column(name = "exam_name")
     private String examName;
+    @Column(name = "exam_date")
     private Date examDate;
     private double point;
     @ManyToOne
