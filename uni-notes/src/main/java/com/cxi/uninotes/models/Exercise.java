@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-
+/**
+ * A model representing an exercise sheet of a course.
+ */
 @Entity
 @Getter
 @Setter
@@ -16,7 +18,7 @@ public class Exercise extends DBEntity {
     private int sheetNumber;
     @Column(name = "due_date")
     private Date dueDate;
-    private double note;
+    private double point;
     @ManyToOne
     private Course course;
 }

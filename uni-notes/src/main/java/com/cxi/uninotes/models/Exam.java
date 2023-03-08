@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-
+/**
+ * A model representing an exam of a course.
+ */
 @Entity
 @Getter
 @Setter
