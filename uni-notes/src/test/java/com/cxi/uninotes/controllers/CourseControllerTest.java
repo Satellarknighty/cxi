@@ -1,27 +1,33 @@
 package com.cxi.uninotes.controllers;
 
 import com.cxi.uninotes.exceptions.CourseAlreadyExistsException;
+import com.cxi.uninotes.exceptions.CourseNotFoundException;
 import com.cxi.uninotes.models.Course;
 import com.cxi.uninotes.services.CourseService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class CourseControllerTest {
-    private static CourseService courseService;
-    private static CourseController courseController;
+    @Mock
+    private CourseService courseService;
+    @InjectMocks
+    private CourseController courseController;
     private static Course testCourse;
     @BeforeAll
     static void beforeAll(){
-        courseService = mock(CourseService.class);
-        courseController = new CourseController(courseService);
         testCourse = new Course();
         testCourse.setCourseName("test course");
     }
@@ -45,13 +51,35 @@ class CourseControllerTest {
 
     @Test
     void testFoundOneCourse() {
-        //given(courseRepository.findCourseByCourseName(anyString())).willReturn(Optional.of(testCourse));
+        given(courseService.findCourse(anyString()))
+                .willReturn(testCourse);
         var result = courseController.findCourse(testCourse.getCourseName());
         assertEquals(testCourse, result);
     }
 
     @Test
     void testFoundZeroCourse() {
+        String decoyCourseName = "A course name that doesn't exist.";
+        given(courseService.findCourse(anyString()))
+                .willThrow(new CourseNotFoundException(decoyCourseName));
+        assertThrows(CourseNotFoundException.class, () ->
+                courseController.findCourse(decoyCourseName));
+    }
 
+    @Test
+    void testFoundSomeCoursesName() {
+        List<String> nonEmptyList = Collections.singletonList("non empty");
+        given(courseService.findAllCoursesName())
+                .willReturn(nonEmptyList);
+        assertEquals(nonEmptyList,
+                courseController.findAllCoursesName());
+    }
+
+    @Test
+    void testFoundZeroCourseName() {
+        given(courseService.findAllCoursesName())
+                .willThrow(new CourseNotFoundException());
+        assertThrows(CourseNotFoundException.class, () ->
+                courseController.findAllCoursesName());
     }
 }
