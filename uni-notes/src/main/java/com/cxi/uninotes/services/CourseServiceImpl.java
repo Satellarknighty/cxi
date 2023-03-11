@@ -34,7 +34,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public List<String> findAllCoursesName() {
-        var allCourses = courseRepository.findCourses();
+        var allCourses = courseRepository.findAll();
         if (allCourses.isEmpty()){
             throw new CourseNotFoundException();
         }

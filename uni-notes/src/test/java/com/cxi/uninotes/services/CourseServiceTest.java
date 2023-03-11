@@ -67,7 +67,7 @@ public class CourseServiceTest {
         Course decoyCourse = new Course();
         decoyCourse.setCourseName("decoy");
         List<Course> nonEmptyList = Collections.singletonList(decoyCourse);
-        given(courseRepository.findCourses())
+        given(courseRepository.findAll())
                 .willReturn(nonEmptyList);
         assertEquals(Collections.singletonList("decoy"),
                 courseService.findAllCoursesName());
@@ -75,7 +75,7 @@ public class CourseServiceTest {
 
     @Test
     void testFoundZeroCourseName() {
-        given(courseRepository.findCourses())
+        given(courseRepository.findAll())
                 .willReturn(Collections.emptyList());
         assertThrows(CourseNotFoundException.class, () ->
                 courseService.findAllCoursesName());

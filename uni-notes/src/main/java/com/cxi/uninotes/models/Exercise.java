@@ -14,11 +14,15 @@ import java.util.Date;
 @Getter
 @Setter
 public class Exercise extends DBEntity {
+    /** The number of this sheet. */
     @Column(name = "sheet_number")
     private int sheetNumber;
+    /** When this sheet must be submitted. */
     @Column(name = "due_date")
     private Date dueDate;
+    /** Point scored for this sheet. */
     private double point;
+    /** The course that this sheet belongs to. */
     @ManyToOne
     private Course course;
 }
