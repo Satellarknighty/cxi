@@ -1,4 +1,4 @@
-package com.cxi.uninotes.models;
+package com.cxi.uninotes.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,12 +15,12 @@ import java.util.Date;
 @Setter
 public class Exam extends DBEntity {
     /** The number of attempt at this exam.     */
-    private int attempt;
+    private Integer attempt;
     /** When the exam will take place     */
     @Column(name = "exam_date")
     private Date examDate;
     /** Point scored in this exam. */
-    private double point;
+    private Double point;
     /** The course that this exam belongs to. */
     @ManyToOne
     private Course course;

@@ -1,4 +1,4 @@
-package com.cxi.uninotes.models;
+package com.cxi.uninotes.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,12 +16,12 @@ import java.util.Date;
 public class Exercise extends DBEntity {
     /** The number of this sheet. */
     @Column(name = "sheet_number")
-    private int sheetNumber;
+    private Integer sheetNumber;
     /** When this sheet must be submitted. */
     @Column(name = "due_date")
-    private Date dueDate;
+    private Date duedate;
     /** Point scored for this sheet. */
-    private double point;
+    private Double point;
     /** The course that this sheet belongs to. */
     @ManyToOne
     private Course course;

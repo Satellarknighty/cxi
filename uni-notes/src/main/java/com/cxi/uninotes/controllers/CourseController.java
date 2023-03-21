@@ -1,6 +1,6 @@
 package com.cxi.uninotes.controllers;
 
-import com.cxi.uninotes.models.Course;
+import com.cxi.uninotes.entities.Course;
 import com.cxi.uninotes.services.CourseService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -50,5 +50,19 @@ public class CourseController {
     @GetMapping("/all")
     public List<String> findAllCoursesName(){
         return courseService.findAllCoursesName();
+    }
+
+    /**
+     * Edit the name and ects of an existing course.
+     *
+     * @param name      The name of the course to be edited.
+     * @param course    The course containing the new attributes.
+     * @return  A message saying the course was successfully edited.
+     */
+    @PutMapping("/edit")
+    public String editCourse(@RequestParam String name,
+                             @RequestBody Course course){
+        courseService.editCourse(name, course);
+        return "Course edited successfully!";
     }
 }

@@ -2,7 +2,7 @@ package com.cxi.uninotes.controllers;
 
 import com.cxi.uninotes.exceptions.CourseAlreadyExistsException;
 import com.cxi.uninotes.exceptions.CourseNotFoundException;
-import com.cxi.uninotes.models.Course;
+import com.cxi.uninotes.entities.Course;
 import com.cxi.uninotes.services.CourseService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ class CourseControllerTest {
     @BeforeAll
     static void beforeAll(){
         testCourse = new Course();
-        testCourse.setCourseName("test course");
+        testCourse.setName("test course");
     }
     @Test
     void testCourseAddedSuccessfully() {
@@ -42,7 +42,7 @@ class CourseControllerTest {
 
     @Test
     void testCourseAddedUnsuccessfully() {
-        willThrow(new CourseAlreadyExistsException(testCourse.getCourseName()))
+        willThrow(new CourseAlreadyExistsException(testCourse.getName()))
                 .given(courseService)
                 .createCourse(any(Course.class));
         assertThrows(CourseAlreadyExistsException.class, () ->
@@ -53,7 +53,7 @@ class CourseControllerTest {
     void testFoundOneCourse() {
         given(courseService.findCourse(anyString()))
                 .willReturn(testCourse);
-        var result = courseController.findCourse(testCourse.getCourseName());
+        var result = courseController.findCourse(testCourse.getName());
         assertEquals(testCourse, result);
     }
 
@@ -81,5 +81,14 @@ class CourseControllerTest {
                 .willThrow(new CourseNotFoundException());
         assertThrows(CourseNotFoundException.class, () ->
                 courseController.findAllCoursesName());
+    }
+
+    @Test
+    void testEditCourseSuccessfully() {
+        willDoNothing()
+                .given(courseService)
+                .editCourse(any(), any());
+        assertEquals("Course edited successfully!",
+                courseController.editCourse("target course", new Course()));
     }
 }

@@ -2,7 +2,7 @@ package com.cxi.uninotes.services;
 
 import com.cxi.uninotes.exceptions.CourseAlreadyExistsException;
 import com.cxi.uninotes.exceptions.CourseNotFoundException;
-import com.cxi.uninotes.models.Course;
+import com.cxi.uninotes.entities.Course;
 import com.cxi.uninotes.repositories.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ public class CourseServiceTest {
     }
     @Test
     void testCreateCourseSuccessful() {
-        given(courseRepository.findCourseByCourseName(any()))
+        given(courseRepository.findCourseByName(any()))
                 .willReturn(Optional.empty());
         courseService.createCourse(new Course());
         verify(courseRepository).saveAndFlush(any(Course.class));
@@ -39,7 +39,7 @@ public class CourseServiceTest {
 
     @Test
     void testCreateCourseUnsuccessful() {
-        given(courseRepository.findCourseByCourseName(any()))
+        given(courseRepository.findCourseByName(any()))
                 .willReturn(Optional.of(new Course()));
         assertThrows(CourseAlreadyExistsException.class, () -> courseService.createCourse(new Course()));
         verify(courseRepository, times(0)).saveAndFlush(any(Course.class));
@@ -48,7 +48,7 @@ public class CourseServiceTest {
     @Test
     void testFoundOneCourse() {
         Course decoyCourse = new Course();
-        given(courseRepository.findCourseByCourseName(anyString()))
+        given(courseRepository.findCourseByName(anyString()))
                 .willReturn(Optional.of(decoyCourse));
         Course result = courseService.findCourse("decoy course");
         assertEquals(decoyCourse, result);
@@ -56,7 +56,7 @@ public class CourseServiceTest {
 
     @Test
     void testFoundZeroCourse() {
-        given(courseRepository.findCourseByCourseName(any()))
+        given(courseRepository.findCourseByName(any()))
                 .willReturn(Optional.empty());
         assertThrows(CourseNotFoundException.class, () ->
                 courseService.findCourse("doesn't exist"));
@@ -65,7 +65,7 @@ public class CourseServiceTest {
     @Test
     void testFoundSomeCoursesName() {
         Course decoyCourse = new Course();
-        decoyCourse.setCourseName("decoy");
+        decoyCourse.setName("decoy");
         List<Course> nonEmptyList = Collections.singletonList(decoyCourse);
         given(courseRepository.findAll())
                 .willReturn(nonEmptyList);
@@ -79,5 +79,19 @@ public class CourseServiceTest {
                 .willReturn(Collections.emptyList());
         assertThrows(CourseNotFoundException.class, () ->
                 courseService.findAllCoursesName());
+    }
+
+    @Test
+    void testEditCourse_Successfully() {
+        String decoyTargetName = "decoy target";
+        Course decoyTarget = new Course();
+        Course decoyAttr = new Course();
+        decoyAttr.setName("decoy attr");
+        given(courseRepository.findCourseByName(decoyTargetName))
+                .willReturn(Optional.of(decoyTarget));
+        given(courseRepository.findCourseByName(decoyAttr.getName()))
+                .willReturn(Optional.empty());
+        courseService.editCourse(decoyTargetName, decoyAttr);
+        verify(courseRepository).saveAndFlush(any());
     }
 }
