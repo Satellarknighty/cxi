@@ -35,12 +35,12 @@ public class CourseController {
     /**
      * GET-Request for retrieving a course from the database.
      *
-     * @param name  The name of the wanted course.
+     * @param courseName  The name of the wanted course.
      * @return  The wanted course, if found.
      */
     @GetMapping
-    public Course findCourse(@RequestParam String name){
-        return courseService.findCourse(name);
+    public Course findCourse(@RequestParam String courseName){
+        return courseService.findCourse(courseName);
     }
 
     /**
@@ -55,14 +55,14 @@ public class CourseController {
     /**
      * Edit the name and ects of an existing course.
      *
-     * @param name      The name of the course to be edited.
+     * @param courseName      The name of the course to be edited.
      * @param course    The course containing the new attributes.
      * @return  A message saying the course was successfully edited.
      */
     @PutMapping("/edit")
-    public String editCourse(@RequestParam String name,
+    public String editCourse(@RequestParam String courseName,
                              @RequestBody Course course){
-        courseService.editCourse(name, course);
+        courseService.editCourse(courseName, course);
         return "Course edited successfully!";
     }
 }
