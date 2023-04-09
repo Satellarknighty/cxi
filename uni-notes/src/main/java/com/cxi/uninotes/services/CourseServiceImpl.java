@@ -17,6 +17,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public void createCourse(Course course) {
+
         var optionalCourse = courseRepository.findCourseByName(course.getName());
         if (optionalCourse.isPresent()){
             throw new CourseAlreadyExistsException(course.getName());

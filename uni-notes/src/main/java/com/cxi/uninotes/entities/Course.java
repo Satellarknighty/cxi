@@ -22,11 +22,9 @@ public class Course extends DBEntity {
     /** The ECTS (Credit point) of this course.    */
     private Integer ects;
     /** All the exercises of this course.    */
-    @OneToMany(mappedBy = "course",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course")
     private final List<Exercise> exercises = new ArrayList<>();
     /** All the exams of this course.    */
-    @OneToMany(mappedBy = "course",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course")
     private final List<Exam> exams = new ArrayList<>();
 }
