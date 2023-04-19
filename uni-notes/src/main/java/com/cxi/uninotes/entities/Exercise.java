@@ -19,7 +19,7 @@ public class Exercise extends DBEntity {
     private Integer sheetNumber;
     /** When this sheet must be submitted. */
     @Column(name = "due_date")
-    private Date duedate;
+    private Date dueDate;
     /** Point scored for this sheet. */
     private Double point;
     /** The course that this sheet belongs to. */

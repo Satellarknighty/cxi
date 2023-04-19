@@ -17,7 +17,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     public void addExerciseToACourse(String courseName, Exercise exercise) {
         Course course = courseService.findCourse(courseName);
         if (exerciseRepository.
-                existsByCourse_NameAndSheetNumber(courseName, exercise.getSheetNumber())){
+                existsBySheetNumberAndCourseName(exercise.getSheetNumber(), courseName)){
             throw new ExerciseAlreadyExistsInCourseException(exercise.getSheetNumber(), courseName);
         }
         exercise.setCourse(course);
