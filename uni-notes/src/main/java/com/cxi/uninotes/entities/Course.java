@@ -1,5 +1,6 @@
 package com.cxi.uninotes.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -26,9 +27,9 @@ public class Course extends DBEntity {
     /** The ECTS (Credit point) of this course.    */
     private Integer ects;
     /** All the exercises of this course.    */
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private final List<Exercise> exercises = new ArrayList<>();
     /** All the exams of this course.    */
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private final List<Exam> exams = new ArrayList<>();
 }
