@@ -45,15 +45,6 @@ public class CourseServiceImpl implements CourseService{
                 .map(Course::getName)
                 .toList();
     }
-
-    /**
-     * Edit the name and ects of an existing course.
-     *
-     * @param targetName    The name of the to be edited course.
-     * @param courseAttr    The new attributes of the course, in the form of a {@link Course}.
-     * @throws CourseNotFoundException      if the to be edited course cannot be found.
-     * @throws CourseAlreadyExistsException if the edited course have the same name with another course in the database
-     */
     @Override
     public void editCourse(String targetName, Course courseAttr) {
         var targetCourse = courseRepository.findCourseByName(targetName);

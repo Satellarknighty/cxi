@@ -8,7 +8,7 @@ public class CourseValidator {
     public static void validateCourse(Course course){
         if (course.getName() == null) {
             throw new CourseValidationException(Cause.INVALID_NAME);
-        } else if (course.getEcts() >= 0) {
+        } else if (course.getEcts() <= 0) {
             throw new CourseValidationException(Cause.INVALID_ECTS);
         }
     }
