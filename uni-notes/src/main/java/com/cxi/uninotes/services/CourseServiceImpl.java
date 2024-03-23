@@ -63,6 +63,15 @@ public class CourseServiceImpl implements CourseService{
         courseRepository.saveAndFlush(target);
     }
 
+    @Override
+    public void deleteCourse(String courseName) {
+        var optionalCourse = courseRepository.findCourseByName(courseName);
+        if (optionalCourse.isEmpty()){
+            throw new CourseNotFoundException(courseName);
+        }
+        courseRepository.delete(optionalCourse.get());
+    }
+
     private Course setAttrToTarget(Course courseAttr, Course target) {
         String nameAttr = courseAttr.getName();
         if (nameAttr != null){

@@ -34,4 +34,10 @@ public interface CourseService {
      * @throws CourseAlreadyExistsException if the edited course have the same name with another course in the database
      */
     void editCourse(String targetName, Course newCourse);
+
+    /**
+     *  Delete the course with the given name.
+     * @throws CourseNotFoundException if the to be deleted course cannot be found.
+     */
+    void deleteCourse(String courseName);
 }
