@@ -4,6 +4,7 @@ import com.cxi.uninotes.exceptions.CourseAlreadyExistsException;
 import com.cxi.uninotes.exceptions.CourseNotFoundException;
 import com.cxi.uninotes.entities.Course;
 import com.cxi.uninotes.repositories.CourseRepository;
+import com.cxi.uninotes.utils.validators.CourseValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public void createCourse(Course course) {
-
+        CourseValidator.validateCourse(course);
         var optionalCourse = courseRepository.findCourseByName(course.getName());
         if (optionalCourse.isPresent()){
             throw new CourseAlreadyExistsException(course.getName());
