@@ -13,7 +13,7 @@ import java.util.List;
  * {@link CourseService} for processing.
  */
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/course")
 @RequiredArgsConstructor
 public class CourseController {
     /** Every request will be processed here.     */

@@ -6,11 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("exercises")
+@RequestMapping("exercise")
 @RequiredArgsConstructor
 public class ExerciseController {
     private final ExerciseService exerciseService;
-    @PostMapping("/add")
+    @PostMapping
     public String addExerciseToACourse(@RequestParam String courseName,
                                        @RequestBody Exercise exercise){
         exerciseService.addExerciseToACourse(courseName, exercise);
