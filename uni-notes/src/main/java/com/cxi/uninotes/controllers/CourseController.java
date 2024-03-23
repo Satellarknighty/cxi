@@ -26,7 +26,7 @@ public class CourseController {
      * @param course    The course to be persisted in the database.
      * @return  A message informing that the course had been created successfully.
      */
-    @PostMapping("/create")
+    @PostMapping
     public String createCourse(@RequestBody @NonNull Course course){
         courseService.createCourse(course);
         return "Course created successfully!";
@@ -59,10 +59,22 @@ public class CourseController {
      * @param course    The course containing the new attributes.
      * @return  A message saying the course was successfully edited.
      */
-    @PutMapping("/edit")
+    @PutMapping
     public String editCourse(@RequestParam String courseName,
                              @RequestBody Course course){
         courseService.editCourse(courseName, course);
         return "Course edited successfully!";
+    }
+
+    /**
+     * Delete an existing course.
+     *
+     * @param courseName    The name of the to be deleted course.
+     * @return A message saying the course was successfully deleted.
+     */
+    @DeleteMapping
+    public String deleteCourse(@RequestParam String courseName){
+        courseService.deleteCourse(courseName);
+        return "Course deleted successfully!";
     }
 }
