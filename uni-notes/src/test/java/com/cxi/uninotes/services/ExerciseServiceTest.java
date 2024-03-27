@@ -1,9 +1,9 @@
 package com.cxi.uninotes.services;
 
-import com.cxi.uninotes.entities.Course;
 import com.cxi.uninotes.entities.Exercise;
 import com.cxi.uninotes.exceptions.ExerciseAlreadyExistsInCourseException;
 import com.cxi.uninotes.exceptions.ExerciseValidationException;
+import com.cxi.uninotes.repositories.CourseRepository;
 import com.cxi.uninotes.repositories.ExerciseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,14 +22,14 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class ExerciseServiceTest {
     @Mock
-    private CourseService courseService;
+    private CourseRepository courseRepository;
     @Mock
     private ExerciseRepository exerciseRepository;
     private ExerciseService exerciseService;
 
     @BeforeEach
     public void beforeEach(){
-        exerciseService = new ExerciseServiceImpl(exerciseRepository, courseService);
+        exerciseService = new ExerciseServiceImpl(exerciseRepository, courseRepository);
     }
 
     @Test

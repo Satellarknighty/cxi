@@ -21,4 +21,9 @@ public class ExerciseValidator {
 //            throw new ExerciseValidationException(ExerciseValidationException.Cause.POINT_OUT_OF_BOUNDS);
 //        }
     }
+    public static void validatePoint(Double point){
+        if (point == null || point < 1.0 || point > 5.0){
+            throw new ExerciseValidationException(ExerciseValidationException.Cause.POINT_OUT_OF_BOUNDS);
+        }
+    }
 }
