@@ -48,7 +48,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public void addPointToAnExerciseOfACourse(String courseName, Integer sheetNumber, Double point) {
         ExerciseValidator.validatePoint(point);
-        if (courseRepository.existsByName(courseName)){
+        if (!courseRepository.existsByName(courseName)){
             throw new CourseNotFoundException(courseName);
         }
         Optional<Exercise> optionalExercise = exerciseRepository.findExerciseBySheetNumberAndCourseName(sheetNumber, courseName);
