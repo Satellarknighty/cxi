@@ -5,6 +5,7 @@ import com.cxi.uninotes.exceptions.CourseNotFoundException;
 import com.cxi.uninotes.exceptions.ExerciseAlreadyExistsInCourseException;
 import com.cxi.uninotes.exceptions.ExerciseValidationException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ExerciseService {
@@ -22,5 +23,7 @@ public interface ExerciseService {
 
     List<String> findAllExercisesOfACourse(String courseName);
 
-    void addPointToAnExerciseOfACourse(String courseName, Integer sheetNumber, Double point);
+    void updatePointOnAnExerciseOfACourse(String courseName, Integer sheetNumber, Double point);
+
+    void updateDueDateOnAnExerciseOfACourse(String courseName, Integer sheetNumber, Date newDate);
 }

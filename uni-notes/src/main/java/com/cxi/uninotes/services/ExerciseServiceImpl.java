@@ -12,6 +12,7 @@ import com.cxi.uninotes.utils.validators.ExerciseValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ public class ExerciseServiceImpl implements ExerciseService{
 
     @Override
     public void addExerciseToACourse(String courseName, Exercise exercise) {
-        ExerciseValidator.validateExercise(exercise);
+        ExerciseValidator.validateSheetNumber(exercise.getSheetNumber());
+        ExerciseValidator.validateDate(exercise.getDueDate());
         Course course = findCourse(courseName);
         if (exerciseRepository.
                 existsBySheetNumberAndCourseName(exercise.getSheetNumber(), courseName)){
@@ -46,18 +48,33 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
     @Override
-    public void addPointToAnExerciseOfACourse(String courseName, Integer sheetNumber, Double point) {
+    public void updatePointOnAnExerciseOfACourse(String courseName, Integer sheetNumber, Double point) {
         ExerciseValidator.validatePoint(point);
         if (!courseRepository.existsByName(courseName)){
             throw new CourseNotFoundException(courseName);
         }
-        Optional<Exercise> optionalExercise = exerciseRepository.findExerciseBySheetNumberAndCourseName(sheetNumber, courseName);
-        Exercise exercise = optionalExercise.orElseThrow(() -> new ExerciseNotFoundException(sheetNumber, courseName));
+        Exercise exercise = findExercise(sheetNumber, courseName);
         exercise.setPoint(point);
         exerciseRepository.saveAndFlush(exercise);
     }
+
+    @Override
+    public void updateDueDateOnAnExerciseOfACourse(String courseName, Integer sheetNumber, Date newDate) {
+        ExerciseValidator.validateDate(newDate);
+        if (!courseRepository.existsByName(courseName)){
+            throw new CourseNotFoundException(courseName);
+        }
+        Exercise exercise = findExercise(sheetNumber, courseName);
+        exercise.setDueDate(newDate);
+        exerciseRepository.saveAndFlush(exercise);
+    }
+
     private Course findCourse(String courseName){
         Optional<Course> optionalCourse = courseRepository.findCourseByName(courseName);
         return optionalCourse.orElseThrow(() -> new CourseNotFoundException(courseName));
+    }
+    private Exercise findExercise(Integer sheetNumber, String courseName){
+        Optional<Exercise> optionalExercise = exerciseRepository.findExerciseBySheetNumberAndCourseName(sheetNumber, courseName);
+        return optionalExercise.orElseThrow(() -> new ExerciseNotFoundException(sheetNumber, courseName));
     }
 }

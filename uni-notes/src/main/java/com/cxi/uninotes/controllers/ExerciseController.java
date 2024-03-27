@@ -5,6 +5,7 @@ import com.cxi.uninotes.services.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,14 @@ public class ExerciseController {
     public String updatePointOnAnExerciseOfACourse(@PathVariable("name") String courseName,
                                                    @RequestParam Integer sheetNumber,
                                                    @RequestParam Double point){
-        exerciseService.addPointToAnExerciseOfACourse(courseName, sheetNumber, point);
+        exerciseService.updatePointOnAnExerciseOfACourse(courseName, sheetNumber, point);
         return String.format("You scored %.1f on sheet number %d of the course %s.", point, sheetNumber, courseName);
     }
-
+    @PutMapping("/date")
+    public String updateDueDateOnAnExerciseOfACourse(@PathVariable("name") String courseName,
+                                                     @RequestParam Integer sheetNumber,
+                                                     @RequestParam Date newDate){
+        exerciseService.updateDueDateOnAnExerciseOfACourse(courseName, sheetNumber, newDate);
+        return String.format("New due date for sheet %s has been updated!", sheetNumber);
+    }
 }
