@@ -20,7 +20,7 @@ public class ExerciseController {
         return String.format("Exercise number %d has been successfully added to course %s!",
                 exercise.getSheetNumber(), courseName);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<String> findAllExercisesOfACourse(@PathVariable("name") String courseName){
         return exerciseService.findAllExercisesOfACourse(courseName);
     }
