@@ -30,10 +30,10 @@ img[src] {
     height: 200px;
 }
 
-img[src]:hover {
+/*img[src]:hover {
     width: 500px;
     height: 500px;
-}
+}*/
 
 html {
     font-size: 15px;
