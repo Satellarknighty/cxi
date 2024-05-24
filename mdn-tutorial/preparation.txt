@@ -1,0 +1,2 @@
+color-theme: #80ff00
+font: Roboto
