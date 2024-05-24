@@ -3,6 +3,7 @@ package com.cxi.uninotes.services;
 import com.cxi.uninotes.exceptions.CourseAlreadyExistsException;
 import com.cxi.uninotes.exceptions.CourseNotFoundException;
 import com.cxi.uninotes.entities.Course;
+import com.cxi.uninotes.exceptions.CourseValidationException;
 import com.cxi.uninotes.repositories.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,16 @@ public class CourseServiceTest {
                 .willReturn(Optional.of(new Course()));
         assertThrows(CourseAlreadyExistsException.class, () -> courseService.createCourse(new Course()));
         verify(courseRepository, times(0)).saveAndFlush(any(Course.class));
+    }
+
+    @Test
+    void testCreateCourse_WithInvalidName() {
+        assertThrows(CourseValidationException.class, () -> courseService.createCourse(new Course(null,6)));
+    }
+
+    @Test
+    void testCreateCourse_WithInvalidEcts() {
+        assertThrows(CourseValidationException.class, () -> courseService.createCourse(new Course("example", 0)));
     }
 
     @Test

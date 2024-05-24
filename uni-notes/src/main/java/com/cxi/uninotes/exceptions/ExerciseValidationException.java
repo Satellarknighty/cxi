@@ -1,6 +1,6 @@
 package com.cxi.uninotes.exceptions;
 
-public class ExerciseValidationException extends RuntimeException{
+public class ExerciseValidationException extends InternalServerException{
     public enum Cause {
         INVALID_SHEET_NUMBER,
         DATE_TOO_LATE,

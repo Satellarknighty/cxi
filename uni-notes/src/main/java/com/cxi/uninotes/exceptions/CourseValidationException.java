@@ -1,6 +1,6 @@
 package com.cxi.uninotes.exceptions;
 
-public class CourseValidationException extends RuntimeException {
+public class CourseValidationException extends InternalServerException {
     public enum Cause {
         INVALID_NAME,
         INVALID_ECTS
