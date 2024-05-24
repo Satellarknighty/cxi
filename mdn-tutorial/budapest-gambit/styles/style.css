@@ -1,0 +1,23 @@
+p, h1 {
+    color:black;
+    width: 500px;
+    /*border: 1px solid black;*/
+}
+
+#first-move {
+    color: brown;
+}
+
+.move {
+    color: red;
+}
+
+img[src] {
+    width: 200px;
+    height: 200px;
+}
+
+img[src]:hover {
+    width: 500px;
+    height: 500px;
+}
