@@ -99,14 +99,13 @@
   <body>
     <header>
       <h1>Mozilla</h1>
-      <!-- insert <img> element, link to the small
-          version of the Firefox logo -->
+      <img src="firefox_logo-only_RGB_120.png" alt="Firefox logo">
 
     </header>
 
     <main>
       <article>
-        <!-- insert iframe from youtube -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ojcNcvb1olg?si=7bkc7p8QnY8Kg45I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
         <h2>Rocking the free web</h2>
 
@@ -118,18 +117,37 @@
       <div class="further-info">
         <!-- insert images with srcsets and sizes -->
         <a href="https://www.mozilla.org/en-US/firefox/new/">
-          <img>
+          <img
+            srcset="firefox_logo-only_RGB_120.png 120w, firefox_logo-only_RGB_400.png 400w"
+            sizes="(max-width: 500px) 120px, 400px"
+            src="firefox_logo-only_RGB_400.png"
+            alt="Firefox logo">
         </a>
         <a href="https://www.mozilla.org/">
-          <img>
+          <img
+            srcset="mozilla-dinosaur-head_120.png 120w, mozilla-dinosaur-head_400.png 400w"
+            sizes="(max-width: 500px) 120px, 400px"
+            src="mozilla-dinosaur-head_120.png"
+            alt="A red dinosaur">
         </a>
         <a href="https://addons.mozilla.org/">
-          <img>
+          <img
+            srcset="firefox-addons_120.jpg 120w, firefox-addons_400.jpg 400w"
+            sizes="(max-width: 500px) 120px, 400px"
+            src="firefox-addons_400.jpg"
+            alt="Pieces of puzzle forming the Firefox logo.">
         </a>
         <a href="https://developer.mozilla.org/en-US/">
-          <img>
+          <img
+            src="mdn.svg"
+            alt="A blue folded piece of paper.">
         </a>
-        <div class="clearfix"></div>
+        <div class="clearfix">
+          <picture>
+            <source media="(max-width: 1199px)" srcset="red-panda_400.jpg">
+            <img src="red-panda_1200.jpg" alt="A picture of a red panda.">
+          </picture>
+        </div>
       </div>
 
       <div class="red-panda">
