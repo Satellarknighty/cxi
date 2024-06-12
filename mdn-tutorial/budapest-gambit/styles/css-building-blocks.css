@@ -1,0 +1,11 @@
+li[class="rubinstein"] {
+    color: aliceblue;
+}
+
+article ol li:first-child {
+    color: blueviolet;
+}
+
+header h2::after {
+    content: " 2. c4 e5";
+}

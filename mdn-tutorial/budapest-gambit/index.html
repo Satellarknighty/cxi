@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <link href="styles/style.css" rel="stylesheet" />
+        <link href="styles/css-building-blocks.css" rel="stylesheet" />
         <!--google fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +25,7 @@
     <body>
         <header>
             <h1>The Budapest Gambit</h1>
-            <h2>1. d4 Nf6 2. c4 e5</h2>
+            <h2>1. d4 Nf6</h2>
         </header>
 
         <nav>
@@ -33,26 +34,49 @@
                 <li><a href="#more-info">More Info</a></li>
             </ul>
         </nav>
-        
-        <img src="images/budapest-gambit.png" alt="1. d4 Nf6 2. c4 e5" />
-        <p>The <em>shocking</em> move 2...<abbr title="King's pawn moves from e3 to e5">e5</abbr> - placing a pawn where it is undefended and can be captured with a subsequent attack on the black Nf6 - 
-        is known as the <strong>Budapest Defense</strong>, or <strong>Budapest Gambit</strong>. Black displaces the d4 pawn, hoping to develop rapidly and regain the pawn on e5.</p>
+        <article>
 
-        <h3 id="main-line">Main line:</h3>
+            <img src="images/budapest-gambit.png" alt="1. d4 Nf6 2. c4 e5" />
+            <p>The <em>shocking</em> move 2...<abbr title="King's pawn moves from e3 to e5">e5</abbr>
+                 - placing a pawn where it is undefended and can be captured with a subsequent attack 
+                 on the black Nf6 - is known as the <strong>Budapest Defense</strong>, or 
+                 <strong>Budapest Gambit</strong>. Black displaces the d4 pawn, hoping to develop rapidly 
+                 and regain the pawn on e5.
+            </p>
 
-        <ol>
-            <li id="first-move">d4 Nf6</li>
-            <li class="move">c4 e5</li>
-            <li class="move">dxe5 Ng4</li>
-        </ol>
-        
-        <img src="images/main-line.png" alt="3. dxe5 Ng4" />
+            <h3 id="main-line">Main line:</h3>
+            <ol>
+                <li>d4 Nf6</li>
+                <li class="move">c4 e5</li>
+                <li class="move">dxe5 Ng4</li>
+                <p>From here the Rubinstein's variation:</p>
+                <li class="rubinstein">Bf4 Nc6</li>
+                <li class="rubinstein">Nf3 Bc4+</li>
+            </ol>
+            
+            <img src="images/main-line.png" alt="3. dxe5 Ng4" />
 
-        <p>More info here: <a href="https://www.chess.com/openings/Budapest-Gambit" title="Chess.com">Chess.com</a></p>
-        <p>Download the PDF version of the <a href="https://www.newinchess.com/media/wysiwyg/product_pdf/8441.pdf" download="Budapest-Gambit.pdf">Budapest Gambit</a> here.</p>
-        <h3 id="more-info">More Info</h3>
-                
+            <h3 id="more-info">More Info</h3>
+            <p>More info here: <a href="https://www.chess.com/openings/Budapest-Gambit" title="Chess.com">Chess.com</a></p>
+            <p>Download the PDF version of the <a href="https://www.newinchess.com/media/wysiwyg/product_pdf/8441.pdf" download="Budapest-Gambit.pdf">Budapest Gambit</a> here.</p>
+        </article>
         <button>Change user</button>
-        <address>Viet Hai Trinh, Hanoi, Vietnam</address>, nicknamed C<sub>x</sub><sup>i</sup>.
+        <address>Viet Hai Trinh, Hanoi, Vietnam</address>, nicknamed C<sub>x</sub><sup>i</sup>.<br>
+
+        <video src="medium/budapest-gambit.webm" width="400" height="400" controls>
+            <p>
+                Your browser doesn't support HTML video. Try the following link instead:
+                <a href="medium/budapest-gambit.webm">Budapest Gambit</a>.
+            </p>
+        </video>
+        <audio src="medium/bi-beo.ogg" controls autoplay preload="auto">
+            <p>
+                Your browser doesn't support HTML audio. Try the following link instead:
+                <a href="medium/bi-beo.ogg">Bi beo</a>.
+            </p>
+        </audio>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/urITvqQleUE?si=53j7wXY_gLrmNOjf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172572.96743889985!2d18.965494638427604!3d47.4810953783628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741c334d1d4cfc9%3A0x400c4290c1e1160!2sBudapest%2C%20Ungarn!5e0!3m2!1sde!2sde!4v1717016596775!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
     </body>
 </html>

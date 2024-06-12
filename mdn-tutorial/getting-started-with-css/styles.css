@@ -1,0 +1,36 @@
+h1 {
+    color: red;
+}
+
+li {
+    list-style-type: none;
+}
+
+.special {
+    color: green;
+    font-weight: bold;
+}
+
+li em {
+    color: purple;
+}
+
+p span {
+    color: red;
+}
+
+h1 + p {
+    font-size: 150%;
+}
+
+a:link {
+    color: green;
+}
+
+a:visited {
+    color: yellow;
+}
+
+a:hover {
+    text-decoration: none;
+}
